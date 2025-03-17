@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Реєстрація та меню</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h2>Логотип</h2>
+            </div>
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+            <label for="menu-toggle" class="burger-icon">&#9776;</label>
+            <ul class="nav-links">
+                <li><a href="#">Головна</a></li>
+                <li><a href="#">Послуги</a></li>
+                <li><a href="#">Про нас</a></li>
+                <li><a href="#">Блог</a></li>
+                <li><a href="#">Контакти</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="register-form-container">
+            <h1 class="form-title">Реєстрація</h1>
+            <form action="#" method="POST">
+                <div class="field">
+                    <input type="text" name="full_name" placeholder="Прізвище, ім'я, по батькові" required>
+                </div>
+                <div class="field">
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="field">
+                    <input type="tel" name="phone" placeholder="Телефон" required>
+                </div>
+                <div class="field">
+                    <input type="date" name="birthdate" required>
+                </div>
+                <div class="checkbox-field">
+                    <input type="checkbox" id="agree" required>
+                    <label for="agree">Погоджуюсь на обробку персональних даних</label>
+                </div>
+                <button type="submit" class="button">Реєстрація</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
