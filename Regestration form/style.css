@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.register-form-container {
+    max-width: 415px;
+    background: #FFFFFF;
+    box-shadow: 0px 6px 50px rgba(217, 229, 255, 0.7);
+    border-radius: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 38px;
+    padding-bottom: 38px;
+}
+
+.form-title {
+    color: #30507D;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    margin-bottom: 38px;
+    text-align: center;
+}
+
+.form-field {
+    margin-bottom: 20px;
+}
+
+input {
+    height: 45px;
+    width: 100%;
+    color: #3b5983;
+    font-size: 14px;
+    line-height: 16px;
+    border: 2px solid #e9f2ff;
+    border-radius: 5px;
+    padding-left: 15px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    height: 45px;
+    background: #247fff;
+    border-radius: 5px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0d6cf2;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.container input[type="checkbox"] {
+    position: absolute;
+    left: 0;
+    opacity: 0; /* Сховати сам чекбокс */
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    background-color: #eee;
+    border-radius: 5px;
+    display: inline-block;
+    margin-right: 10px;
+    position: relative;
+}
+
+.container input[type="checkbox"]:checked ~ .checkmark {
+    background-color: #247fff;
+    border: 1px solid #247fff;
+}
+
+.container input[type="checkbox"]:checked ~ .checkmark::after {
+    content: '\2713'; /* Вставляємо символ галочки */
+    font-size: 14px;
+    color: #fff;
+    position: absolute;
+    top: 1px;
+    left: 5px;
+}
+
+
