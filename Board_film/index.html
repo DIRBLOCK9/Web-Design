@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>Бібліотека фільмів</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f4f6;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .filters select, .filters button {
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .film-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .film-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+    .film-card:hover {
+      transform: scale(1.02);
+    }
+    .film-poster {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+    .film-info {
+      padding: 12px;
+    }
+    .film-info h3 {
+      margin: 0 0 6px;
+    }
+    .film-info p {
+      margin: 4px 0;
+      font-size: 14px;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎬 Бібліотека фільмів</h1>
+
+  <div class="filters">
+    <select id="yearFilter">
+      <option value="">Всі роки</option>
+    </select>
+    <select id="genreFilter">
+      <option value="">Всі жанри</option>
+    </select>
+    <button onclick="applyFilters()">Застосувати фільтри</button>
+    <button onclick="resetFilters()">Скинути фільтри</button>
+  </div>
+
+  <div class="film-container" id="filmContainer"></div>
+
+  <script>
+    const films = [
+      { title: "Фільм 1", year: 2023, genres: ["Комедія", "Драма"], director: "Іван Петренко", poster: "image/1,.jpg" },
+      { title: "Фільм 2", year: 2024, genres: ["Драма"], director: "Олег Іванов", poster: "image/2..jpeg" },
+      { title: "Фільм 3", year: 2022, genres: ["Бойовик", "Трилер"], director: "Андрій Сидоренко", poster: "image/3..jpg" },
+      { title: "Фільм 4", year: 2024, genres: ["Фантастика", "Драма"], director: "Марія Шевченко", poster: "image/4,.webp" },
+      { title: "Фільм 5", year: 2021, genres: ["Комедія"], director: "Наталія Коваль", poster: "image/5,.webp" },
+      { title: "Фільм 6", year: 2020, genres: ["Мелодрама"], director: "Ігор Мельник", poster: "image/6..webp" },
+      { title: "Фільм 7", year: 2023, genres: ["Трилер"], director: "Оксана Луценко", poster: "image/7..jpg" },
+      { title: "Фільм 8", year: 2024, genres: ["Фантастика", "Бойовик"], director: "Роман Дяченко", poster: "image/8,.webp" },
+      { title: "Фільм 9", year: 2022, genres: ["Документальний"], director: "Ілля Гордон", poster: "image/9.k.jpg" },
+      { title: "Фільм 10", year: 2023, genres: ["Драма"], director: "Світлана Хоменко", poster: "image/10l.jpg" },
+    ];
+
+    const filmContainer = document.getElementById('filmContainer');
+    const yearFilter = document.getElementById('yearFilter');
+    const genreFilter = document.getElementById('genreFilter');
+
+    function renderFilms(data) {
+      filmContainer.innerHTML = '';
+      if (data.length === 0) {
+        filmContainer.innerHTML = '<p>Немає фільмів за вибраними фільтрами.</p>';
+        return;
+      }
+
+      data.forEach(film => {
+        const card = document.createElement('div');
+        card.className = 'film-card';
+        card.innerHTML = `
+          <img src="${film.poster}" alt="${film.title}" class="film-poster">
+          <div class="film-info">
+            <h3>${film.title}</h3>
+            <p><strong>Рік:</strong> ${film.year}</p>
+            <p><strong>Жанр:</strong> ${film.genres.join(', ')}</p>
+            <p><strong>Режисер:</strong> ${film.director}</p>
+          </div>
+        `;
+        filmContainer.appendChild(card);
+      });
+    }
+
+    function populateFilters() {
+      const years = [...new Set(films.map(f => f.year))].sort((a, b) => b - a);
+      years.forEach(year => {
+        const option = document.createElement('option');
+        option.value = year;
+        option.textContent = year;
+        yearFilter.appendChild(option);
+      });
+
+      const genres = [...new Set(films.flatMap(f => f.genres))].sort();
+      genres.forEach(genre => {
+        const option = document.createElement('option');
+        option.value = genre;
+        option.textContent = genre;
+        genreFilter.appendChild(option);
+      });
+    }
+
+    function applyFilters() {
+      const selectedYear = yearFilter.value;
+      const selectedGenre = genreFilter.value;
+
+      const filtered = films.filter(film => {
+        const yearMatch = !selectedYear || film.year == selectedYear;
+        const genreMatch = !selectedGenre || film.genres.includes(selectedGenre);
+        return yearMatch && genreMatch;
+      });
+
+      renderFilms(filtered);
+    }
+
+    function resetFilters() {
+      yearFilter.value = '';
+      genreFilter.value = '';
+      renderFilms(films);
+    }
+
+    
+    populateFilters();
+    renderFilms(films);
+  </script>
+</body>
+</html>
